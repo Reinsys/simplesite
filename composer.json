@@ -1,0 +1,27 @@
+{
+    "name": "reinsys/simple",
+    "description": "A framwork for building simple site with Reinsys Resources",
+    "authors": [
+        {
+            "name": "Tomiwa Adefokun",
+            "email": "tomiwa.adefokun@reinsys.com"
+        }
+    ],
+    "require": {        
+        "symfony/http-client": "^5.0",
+        "symfony/cache": "^5.0",
+        "symfony/routing": "^5.0",
+        "twig/twig": "^3.0",
+        "symfony/http-foundation": "^5.0",
+        "symfony/config": "^5.0",
+        "symfony/yaml": "^5.0",
+        "symfony/dotenv": "^5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Reinsys\\": "reinsys",
+            "App\\": "app"
+        }
+    },
+    "license": "proprietary"
+}

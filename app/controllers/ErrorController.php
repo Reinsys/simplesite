@@ -5,6 +5,7 @@ use Reinsys\Simple\Controller;
 
 class ErrorController extends Controller{
     function __construct(){
+        $this->initialize();
     }
     public function notfound(){
         $template = $this->render('error.html', ['message' => 'Page not found.']);

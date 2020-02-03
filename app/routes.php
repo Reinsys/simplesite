@@ -9,8 +9,6 @@ class Routes{
     public static function fetch(){
         $routes = new RouteCollection();
 
-       //$home = ;
-
         $routes->add('home', 
             (new Route(
                 '/',
@@ -18,12 +16,6 @@ class Routes{
             ))->setMethods('GET')
         );
 
-        $routes->add('about', 
-            (new Route(
-                '/about',
-                array('controller' => Controllers\ContentController::class, 'method'=>'about')
-            ))->setMethods('GET')
-        );
         $routes->add('page', 
             (new Route(
                 '/page/{name}',
@@ -31,11 +23,30 @@ class Routes{
                 array('name' => '[a-zA-Z0-9-_]+')
             ))->setMethods('GET')
         );
+        $routes->add('resource-seo', 
+            (new Route(
+                '/resource/{id}/{seo}',
+                array('controller' => Controllers\ContentController::class, 'method'=>'resource'),
+                array('id' => '[0-9]+')
+            ))->setMethods('GET')
+        );
         $routes->add('resource', 
             (new Route(
                 '/resource/{id}',
                 array('controller' => Controllers\ContentController::class, 'method'=>'resource'),
                 array('id' => '[0-9]+')
+            ))->setMethods('GET')
+        );
+        $routes->add('resources-categories', 
+            (new Route(
+                '/resources/{type}/{category}',
+                array('controller' => Controllers\ContentController::class, 'method'=>'resources')
+            ))->setMethods('GET')
+        );
+        $routes->add('resources', 
+            (new Route(
+                '/resources/{type}',
+                array('controller' => Controllers\ContentController::class, 'method'=>'resources')
             ))->setMethods('GET')
         );
 

@@ -13,10 +13,11 @@ use App\Controllers\ErrorController;
 
 class ContentController extends \Reinsys\Simple\Controller{
     public $sdk; 
-    
+    public $cacheDir;
     function __construct(){
         $this->initialize();
         $this->sdk = new ReinsysSDK($this->getWebsite()->reinsysID);
+        $this->cacheDir = __DIR__ . '/../../cache/' . $this->getWebsite()->reinsysHandleName;
     }
     public function home(){
         return $this->render('base.html');
@@ -52,7 +53,7 @@ class ContentController extends \Reinsys\Simple\Controller{
     public function getPage($t){
         $page = strtolower($t);
 
-        $cache = new FilesystemAdapter('content', 86400, __DIR__ . '/../../cache');
+        $cache = new FilesystemAdapter('content', 86400, $this->cacheDir);
         $cacheKey = 'reinsys_content_pages';
 
         $response = $cache->get($cacheKey, function (ItemInterface $item) {
@@ -81,7 +82,7 @@ class ContentController extends \Reinsys\Simple\Controller{
             return $this->sdk->getResources($type, $category, $limit, $offset, $search);
         }
         else{
-            $cache = new FilesystemAdapter('content', 86400, __DIR__ . '/../../cache');
+            $cache = new FilesystemAdapter('content', 86400, $this->cacheDir);
             $cacheKey = 'reinsys_content_resources_' . $type . '_' . $category . '_' . $limit . '_' . $offset;
 
             return $cache->get($cacheKey, function (ItemInterface $item) use($type, $category, $limit, $offset) {
@@ -95,7 +96,7 @@ class ContentController extends \Reinsys\Simple\Controller{
         # code...
         $type = strtolower($t);
 
-        $cache = new FilesystemAdapter('content', 86400, __DIR__ . '/../../cache');
+        $cache = new FilesystemAdapter('content', 86400, $this->cacheDir);
         $cacheKey = 'reinsys_content_categories_' . $type;
 
         $result = $cache->get($cacheKey, function (ItemInterface $item) use($type) {
@@ -108,7 +109,7 @@ class ContentController extends \Reinsys\Simple\Controller{
     {
         # code...
 
-        $cache = new FilesystemAdapter('content', 86400, __DIR__ . '/../../cache');
+        $cache = new FilesystemAdapter('content', 86400, $this->cacheDir);
         $cacheKey = 'reinsys_content_resource_' . $id;
 
         return $cache->get($cacheKey, function (ItemInterface $item) use($id) {

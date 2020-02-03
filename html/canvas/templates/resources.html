@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock title %}
+{% block content %}
+{% for item in data %}
+<section>
+    <h2>{{ item.title }}</h2>
+    <p>
+        {% autoescape false %}
+            {{item.content}}
+        {% endautoescape %}
+    </p>
+</section>
+{% endfor %}
+{% endblock content %}

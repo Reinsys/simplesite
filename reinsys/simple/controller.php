@@ -21,7 +21,7 @@ class Controller{
     public function render($template, $data = []){
         /* configure twig */
         $viewTemplatesPath = __DIR__.'/../../html/' . REINSYS_SIMPLE_FRONTEND . '/templates';
-        $viewCachePath = __DIR__.'/../../cache/twig/' . $this->website->reinsysHandleName;
+        $viewCachePath = __DIR__.'/../../cache/' . $this->website->reinsysHandleName . '/views/' . REINSYS_SIMPLE_FRONTEND;
 
         $loader = new \Twig\Loader\FilesystemLoader($viewTemplatesPath);
 
